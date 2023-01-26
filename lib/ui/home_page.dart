@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:reminder_app/services/services.dart';
 import 'package:reminder_app/services/notification_services.dart';
+
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    notificationServices;
+    NotifyHelper.initialize(flutterLocalNotificationsPlugin);
   }
   @override
   Widget build(BuildContext context) {

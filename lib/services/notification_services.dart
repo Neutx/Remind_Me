@@ -5,35 +5,35 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 
 class NotifyHelper {
-  final FlutterLocalNotificationsPlugin
-  _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
-  final AndroidInitializationSettings
-  _androidInitializationSettings = AndroidInitializationSettings('icon');
-
-  void initialiseNotification() async{
-    InitializationSettings initializationSettings = InitializationSettings(
-      android: _androidInitializationSettings
-    );
-    await _flutterLocalNotificationsPlugin.initialize(initializationSettings);
+  static Future initialize(FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
+    var androidInitialize = new AndroidInitializationSettings('icon');
+    var initializationsSettings = new InitializationSettings(android: androidInitialize);
+    await flutterLocalNotificationsPlugin.initialize(initializationsSettings) ;
   }
 
-  void sendNotification(String title, String body) {
 
-    AndroidNotificationDetails("channelID", "channelName",
-        importance: Importance.max, priority: Priority.high);
-    NotificationDetails notificationDetails = NotificationDetails();
+  void sendNotification({var id =0 ,
+    required String title,
+    required String body,
+    var payload,
+    required FlutterLocalNotificationsPlugin fln
+  }) async{
+    AndroidNotificationDetails androidPlatformChannelSpecifics=
+    new AndroidNotificationDetails("channelID", "channelName",
+        playSound: true,
+        // sound: RawResourceAndroidNotificationSound('notification'),
+        importance: Importance.max,
+        priority: Priority.high);
 
-    _flutterLocalNotificationsPlugin.show(
+    var not= NotificationDetails(
+        android: androidPlatformChannelSpecifics);
+    await fln.show(
       0,
       title,
       body,
-      notificationDetails,
+      not,
     );
-//hey
   }
-
-
 }
 
 
