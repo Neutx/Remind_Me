@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
     return AppBar(
       leading: GestureDetector(
         onTap: (){
-          notificationServices.sendNotification('title', 'body');
+          notificationServices.sendNotification(title: 'Theme', body: 'You changed your theme', fln: flutterLocalNotificationsPlugin);
           ThemeServices().switchTheme();
         print('Theme Button Tapped');
         },
