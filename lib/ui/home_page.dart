@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/get_core.dart';
 import 'package:reminder_app/services/services.dart';
 import 'package:reminder_app/services/notification_services.dart';
 
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+// style =Get.isDarkMode?'Dark theme applied: Light theme applied'
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -38,11 +41,13 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+
+
   _appBar() {
     return AppBar(
       leading: GestureDetector(
         onTap: (){
-          notificationServices.sendNotification(title: 'Theme', body: 'You changed your theme', fln: flutterLocalNotificationsPlugin);
+          notificationServices.sendNotification(title: 'Theme changed',body:Get.isDarkMode?'Theme changed to light':'theme changed to dark', fln: flutterLocalNotificationsPlugin, );
           ThemeServices().switchTheme();
         print('Theme Button Tapped');
         },

@@ -19,7 +19,7 @@ class NotifyHelper {
     required FlutterLocalNotificationsPlugin fln
   }) async{
     AndroidNotificationDetails androidPlatformChannelSpecifics=
-    new AndroidNotificationDetails("channelID", "channelName",
+    AndroidNotificationDetails("channelID", "channelName",
         playSound: true,
         // sound: RawResourceAndroidNotificationSound('notification'),
         importance: Importance.max,
