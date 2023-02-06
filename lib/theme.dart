@@ -17,9 +17,8 @@ Color darkHeaderClr = Color(0xff424242);
 
 class Themes{
   static final light = ThemeData(
-
+    backgroundColor: Colors.white,
     primaryColor: primaryClr,
-    appBarTheme: AppBarTheme(color: primaryClr,),
     brightness: Brightness.light
   );
   static final dark= ThemeData(
@@ -56,6 +55,16 @@ TextStyle get titleStyle{
         fontSize: 16,
         fontWeight: FontWeight.bold,
         color: Get.isDarkMode?Colors.white:Colors.black,
+      )
+  );
+}
+
+TextStyle get subTitleStyle{
+  return GoogleFonts.lato(
+      textStyle: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.bold,
+        color: Get.isDarkMode?Colors.grey[100]:Colors.grey[600],
       )
   );
 }
