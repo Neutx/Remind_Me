@@ -5,7 +5,7 @@ name: Flutter CI
 on:
   push:
     branches:
-    - master
+    - main
     
 # on: push    # Default will running for every branch.
     
@@ -48,6 +48,6 @@ jobs:
       with:
         artifacts: "build/app/outputs/apk/release/*.apk"
         replacesArtifacts: false
-        tag: v5.0.${{github.run_number}}
+        tag: v0.0.${{github.run_number}}
         token: ${{secrets.TOKEN}}
     
