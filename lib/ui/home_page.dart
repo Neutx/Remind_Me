@@ -42,12 +42,23 @@ class _HomePageState extends State<HomePage> {
         children: [
           _addTaskBar(),
           _addDateBar(),
+          _showTasks(),
 
         ],
       ),
     );
   }
 
+  _showTasks(){
+    return Expanded(
+        child: Obx((){
+          return ListView.builder(
+              itemBuilder: (_,context){
+              return null;
+          });
+        }),
+    );
+  }
   _addDateBar(){
     return Container(
       margin: const EdgeInsets.only( top: 20,left: 10),
@@ -109,7 +120,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          MyButton(label: "+ Add Task", onTap: () =>Get.to(AddTaskPage()), ),
+          MyButton(label: "+ Add Task", onTap: () =>Get.to(() => AddTaskPage()), ),
         ],),
     );
   }

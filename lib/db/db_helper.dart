@@ -23,6 +23,8 @@ class DBHelper{
                     'id INTEGER PRIMARY KEY AUTOINCREMENT,'
                     ' title STRING, note TEXT, date STRING, '
                     'startTime STRING, endTime STRING, '
+                    'remind INTEGER, repeat STRING, '
+                    'color INTEGER,'
                     'isCompleted INTEGER)',);
           },
       );
@@ -30,8 +32,8 @@ class DBHelper{
       print(e);
     }
   }
-  static Future<int> insert(Task? task) async{
-    return await _db!.insert(_tableName, task!.toJson())??1;
+  static Future <int> insert(Task? task) async{
+    return await _db?.insert(_tableName, task!.toJson())??1;
   }
 
 
