@@ -13,6 +13,8 @@ import 'package:reminder_app/theme.dart';
 import 'package:reminder_app/ui/add_task_bar.dart';
 import 'package:reminder_app/ui/widgets/button.dart';
 
+import '../controllers/task_controller.dart';
+
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 // style =Get.isDarkMode?'Dark theme applied: Light theme applied'
@@ -26,6 +28,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   DateTime _selectedDate = DateTime.now();
+  final _taskController = Get.put(TaskController());
   NotifyHelper notificationServices = NotifyHelper();
 
   @override
@@ -53,8 +56,15 @@ class _HomePageState extends State<HomePage> {
     return Expanded(
         child: Obx((){
           return ListView.builder(
+              itemCount: _taskController.taskList.length,
+              
               itemBuilder: (_,context){
-              return null;
+                print(_taskController.taskList.length);
+              return Container(
+                width: 100,
+                height: 50,
+                color: Colors.green,
+              );
           });
         }),
     );
