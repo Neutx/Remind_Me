@@ -20,6 +20,7 @@ dependencies:
   intl:
   google_fonts:
   date_picker_timeline:
+  sqflite:
   flutter_local_notifications:
   flutter_native_timezone:
 

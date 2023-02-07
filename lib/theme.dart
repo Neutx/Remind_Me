@@ -17,12 +17,14 @@ Color darkHeaderClr = Color(0xff424242);
 
 class Themes{
   static final light = ThemeData(
-    backgroundColor: Colors.white,
+      scaffoldBackgroundColor: const Color(0xFFEFEFEF),
+      backgroundColor: Colors.white,
     primaryColor: primaryClr,
     brightness: Brightness.light
   );
   static final dark= ThemeData(
-    appBarTheme: AppBarTheme(color: darkGreyClr),
+      scaffoldBackgroundColor: const Color(0xFF101010),
+      appBarTheme: AppBarTheme(color: darkGreyClr),
     primaryColor: darkGreyClr,
     brightness: Brightness.dark
   );

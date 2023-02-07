@@ -7,8 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
+import 'package:reminder_app/controllers/task_controller.dart';
 import 'package:reminder_app/theme.dart';
+import 'package:reminder_app/ui/widgets/button.dart';
 import 'package:reminder_app/ui/widgets/input_field.dart';
+
+import '../models/task.dart';
 
 class AddTaskPage extends StatefulWidget {
   const AddTaskPage({Key? key}) : super(key: key);
@@ -18,6 +22,9 @@ class AddTaskPage extends StatefulWidget {
 }
 
 class _AddTaskPageState extends State<AddTaskPage> {
+  final TaskController _taskController = Get.put(TaskController());
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _noteController = TextEditingController();
   DateTime _selectedDate = DateTime.now();
   String _endTime = '09:30 PM';
   String _startTime = DateFormat("hh:mm a").format(DateTime.now()).toString();
@@ -25,11 +32,11 @@ class _AddTaskPageState extends State<AddTaskPage> {
   List<int> remindList = [5, 10, 15, 30, 60];
   String _selectedRepeat="None";
   List<String> repeatList = ["None", "Daily", "Weekly", "Monthly", "Yearly"];
+  int _selectedColor=0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.theme.backgroundColor,
       appBar: _appBar(context),
       body: SingleChildScrollView(
         padding: EdgeInsets.only(left: 20, right: 20),
@@ -44,10 +51,12 @@ class _AddTaskPageState extends State<AddTaskPage> {
               MyInputField(
                 title: 'Title',
                 hint: 'Enter Title',
+                controller: _titleController,
               ),
               MyInputField(
                 title: 'Note',
                 hint: 'Enter your note',
+                controller: _noteController,
               ),
               MyInputField(
                 title: 'Date',
@@ -145,18 +154,15 @@ class _AddTaskPageState extends State<AddTaskPage> {
 
                 ),
               ),
+              SizedBox(
+                height: 18,
+              ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Column(
-                    children: [
-                      Text("Color", style: titleStyle),
-                      Wrap(
-                        children: [
-
-                        ],
-                      )
-                    ],
-                  )
+                  _colorPallete(),
+                  MyButton(label: 'Create Task', onTap: ()=>_validateData())
                 ],
               )
             ],
@@ -166,7 +172,73 @@ class _AddTaskPageState extends State<AddTaskPage> {
     );
   }
 
-//workflow check
+  _validateData() {
+    if (_titleController.text.isNotEmpty && _noteController.text.isNotEmpty) {
+      _addTaskToDb();
+      Get.back();
+    } else if (_titleController.text.isEmpty || _noteController.text.isEmpty) {
+      Get.snackbar("Error", "All fields are required",
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.white,
+      icon: Icon(Icons.error_outline, color: Colors.red,),);
+    }
+  }
+
+  _addTaskToDb() async {
+      int value= await _taskController.addTask(
+          task:Task(
+            title: _titleController.text,
+            note: _noteController.text,
+            date: DateFormat.yMd().format(_selectedDate),
+            startTime: _startTime,
+            endTime: _endTime,
+            remind: _selectedRemind,
+            repeat: _selectedRepeat,
+            color: _selectedColor,
+            isCompleted: 0,
+          )
+      );
+      print("My id is "+"$value");
+  }
+  _colorPallete(){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text("Color", style: titleStyle),
+        SizedBox(
+          height: 8,
+        ),
+        Wrap(
+          children:
+          List<Widget>.generate(3, (int index) {
+            return GestureDetector(
+              onTap: (){
+                setState(() {
+                  _selectedColor=index;
+                });
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(right:8.0),
+                child: (
+                    CircleAvatar(
+                      radius: 14,
+                      backgroundColor: index==0?primaryClr:index==1?pinkCLr:yellowClr,
+                      child: _selectedColor==index?Icon(Icons.done,
+                        color: Colors.white,
+                        size: 16,
+                      ):Container(),
+                    )
+                ),
+              ),
+            );
+          })
+          ,
+        )
+      ],
+    );
+  }
+
+
   _appBar(BuildContext context) {
     return AppBar(
       elevation: 0,
