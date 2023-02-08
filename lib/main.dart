@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:reminder_app/db/db_helper.dart';
-import 'package:reminder_app/services/theme_services.dart';
-import 'package:reminder_app/theme.dart';
-import './ui/home_page.dart';
+import 'package:work_manager/service/all_service_initilized.dart';
+import 'package:work_manager/service/theme_services.dart';
+import 'package:work_manager/theme/theme.dart';
+import 'package:work_manager/view/splash_screen.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await DBHelper.initDb();
+  initlization();
   await GetStorage.init();
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     return GetMaterialApp(
 
       title: 'Flutter Demo',
@@ -27,8 +25,7 @@ class MyApp extends StatelessWidget {
       theme: Themes.light,
       darkTheme: Themes.dark,
       themeMode: ThemeServices().theme,
-
-      home: HomePage()
+      home: SplashScreen(),
     );
   }
 }

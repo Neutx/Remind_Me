@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:reminder_app/theme.dart';
+
+import '../../theme/theme.dart';
 
 class MyButton extends StatelessWidget {
   final String label;
