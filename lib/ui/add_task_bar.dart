@@ -50,6 +50,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 style: headingStyle,
               ),
               MyInputField(
+
                 title: 'Title',
                 hint: 'Enter Title',
                 controller: _titleController,
@@ -266,19 +267,49 @@ class _AddTaskPageState extends State<AddTaskPage> {
   }
 
   _getDateFromUser() async {
-    DateTime? _pickerDate = await showDatePicker(
+    DateTime _pickerDate = DateTime.now();
+
+    _pickerDate = await showCupertinoDialog(
       context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2010),
-      lastDate: DateTime(2123),
+      builder: (context) {
+        return CupertinoAlertDialog(
+          content: Container(
+            width: MediaQuery.of(context).size.width * 0.8,
+            height: 200,
+            child: CupertinoDatePicker(
+              mode: CupertinoDatePickerMode.date,
+              initialDateTime: _pickerDate,
+              minimumDate: DateTime(2010),
+              maximumDate: DateTime(2123),
+              onDateTimeChanged: (newDateTime) {
+                _pickerDate = newDateTime;
+              },
+            ),
+          ),
+          actions: [
+            CupertinoDialogAction(
+              child: Text("Done"),
+              onPressed: () {
+                Navigator.pop(context, _pickerDate);
+              },
+            ),
+          ],
+        );
+      },
     );
 
-    if (_pickerDate != null) {
-      setState(() {
-        _selectedDate = _pickerDate;
-      });
-    }
+    setState(() {
+      _selectedDate = _pickerDate;
+    });
+
+    return _selectedDate;
   }
+
+
+
+
+
+
 
 
   _getTimeFromUser({required bool isStartTime}) async {

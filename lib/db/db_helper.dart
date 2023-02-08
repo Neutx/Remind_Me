@@ -19,13 +19,8 @@ class DBHelper{
           onCreate: (db, version) {
             print("Database Created");
             return db.execute(
-                'CREATE TABLE $_tableName ('
-                    'id INTEGER PRIMARY KEY AUTOINCREMENT,'
-                    ' title STRING, note TEXT, date STRING, '
-                    'startTime STRING, endTime STRING, '
-                    'remind INTEGER, repeat STRING, '
-                    'color INTEGER,'
-                    'isCompleted INTEGER)',);
+                'CREATE TABLE $_tableName ("id INTEGER PRIMARY KEY AUTOINCREMENT,title STRING, note TEXT, date STRING,startTime STRING, endTime STRING,remind INTEGER, repeat STRING,color INTEGER,isCompleted INTEGER")'
+                    ,);
           },
       );
     }catch(e){

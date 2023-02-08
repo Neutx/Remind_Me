@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_new, unnecessary_overrides
+
 import 'package:get/get.dart';
 import 'package:reminder_app/db/db_helper.dart';
 

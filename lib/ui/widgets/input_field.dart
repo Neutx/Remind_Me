@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,6 +25,14 @@ class MyInputField extends StatelessWidget {
           Container(
             height: 52,
             decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.transparent,
+                  spreadRadius: 1,
+                  blurRadius: 1,
+                  offset: Offset(0, 1), // changes position of shadow
+                ),
+              ],
               border: Border.all(
                   color: Colors.grey,
                   width: 1
@@ -33,19 +43,18 @@ class MyInputField extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                     child: TextFormField(
+
                       readOnly: widget==null?false:true,
                       autofocus: false,
                       cursorColor: Get.isDarkMode?Colors.grey[100]:Colors.grey[700],
                       controller: controller,
                       style: subTitleStyle,
                       decoration: InputDecoration(
+
                         hintText: hint,
                         hintStyle: subTitleStyle,
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: context.theme.backgroundColor,
-                          width: 0),
-                        ),
-                        contentPadding: EdgeInsets.only(left: 20, top: 14),
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.only(left: 20,),
                       ),
                     )),
                 widget==null?Container():widget!,

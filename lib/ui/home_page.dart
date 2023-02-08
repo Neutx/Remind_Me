@@ -45,30 +45,11 @@ class _HomePageState extends State<HomePage> {
         children: [
           _addTaskBar(),
           _addDateBar(),
-          _showTasks(),
-
         ],
       ),
     );
   }
 
-  _showTasks(){
-    return Expanded(
-        child: Obx((){
-          return ListView.builder(
-              itemCount: _taskController.taskList.length,
-              
-              itemBuilder: (_,context){
-                print(_taskController.taskList.length);
-              return Container(
-                width: 100,
-                height: 50,
-                color: Colors.green,
-              );
-          });
-        }),
-    );
-  }
   _addDateBar(){
     return Container(
       margin: const EdgeInsets.only( top: 20,left: 10),
@@ -138,7 +119,7 @@ class _HomePageState extends State<HomePage> {
   _appBar() {
     return AppBar(
       elevation: 0,
-      backgroundColor: context.theme.backgroundColor,
+      backgroundColor: context.theme.appBarTheme.backgroundColor,
       leading: GestureDetector(
         onTap: (){
           notificationServices.sendNotification(title: 'Theme changed',body:Get.isDarkMode?'Theme changed to light':'theme changed to dark', fln: flutterLocalNotificationsPlugin, );

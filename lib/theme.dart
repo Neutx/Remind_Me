@@ -19,12 +19,13 @@ class Themes{
   static final light = ThemeData(
       scaffoldBackgroundColor: const Color(0xFFEFEFEF),
       backgroundColor: Colors.white,
-    primaryColor: primaryClr,
+      appBarTheme: AppBarTheme(color: Color(0xFFEFEFEF)),
+      primaryColor: primaryClr,
     brightness: Brightness.light
   );
   static final dark= ThemeData(
       scaffoldBackgroundColor: const Color(0xFF101010),
-      appBarTheme: AppBarTheme(color: darkGreyClr),
+      appBarTheme: AppBarTheme(color: Color(0xFF101010)),
     primaryColor: darkGreyClr,
     brightness: Brightness.dark
   );
@@ -64,7 +65,7 @@ TextStyle get titleStyle{
 TextStyle get subTitleStyle{
   return GoogleFonts.lato(
       textStyle: TextStyle(
-        fontSize: 14,
+        fontSize: 15,
         fontWeight: FontWeight.bold,
         color: Get.isDarkMode?Colors.grey[100]:Colors.grey[600],
       )
