@@ -8,6 +8,7 @@ import 'package:work_manager/view/addtask/add_task.dart';
 import 'package:work_manager/view/homepage/component/appbar.dart';
 import 'package:work_manager/view/homepage/component/date_time.dart';
 import 'package:work_manager/view/homepage/component/task_view.dart';
+import 'package:work_manager/view/notes/notes_page.dart';
 
 import '../../theme/theme.dart';
 import '../../util/widgets/button.dart';
@@ -38,17 +39,17 @@ class HomePage extends StatelessWidget {
           TaskView()
         ],
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   backgroundColor: Colors.black,
-      //   onPressed: () {
-      //     Navigator.pushReplacement(context,
-      //         MaterialPageRoute(builder: (context) => const AddTask()));
-      //   },
-      //   child: const Icon(
-      //     Icons.add,
-      //     color: Colors.white,
-      //   ),
-      // ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.black,
+        onPressed: () {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => const NotesPage()));
+        },
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
     );
   }
   _addTaskBar(){
