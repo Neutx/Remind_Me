@@ -5,6 +5,9 @@ import 'package:work_manager/util/colors_list.dart';
 import 'package:work_manager/util/widgets/textStyle.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:work_manager/view/addtask/component/custom_date_picker.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart';
+import 'package:work_manager/util/widgets/extra_functions.dart';
 
 class TaskInput extends ConsumerStatefulWidget {
   const TaskInput({super.key});
@@ -14,6 +17,8 @@ class TaskInput extends ConsumerStatefulWidget {
 }
 
 class _TaskInputState extends ConsumerState<TaskInput> {
+  DateTime dateTime = DateTime.now();
+  final DateFormat format = DateFormat('MMMM');
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
   final TextEditingController _datacontroller = TextEditingController();
@@ -39,6 +44,23 @@ class _TaskInputState extends ConsumerState<TaskInput> {
   @override
   Widget build(BuildContext context) {
     final addTask = ref.watch(createTaskProvider);
+    void showDialog(Widget child){
+      showCupertinoModalPopup<void>(context: context,
+        builder: (BuildContext context) => Container(
+          height: 216,
+          padding: const EdgeInsets.only(
+              top: 6.0),
+          margin: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          color: Colors.pink,
+          child: SafeArea(
+            top: false,
+            child: child,
+          ),
+        ),
+      );
+    }
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
@@ -101,25 +123,72 @@ class _TaskInputState extends ConsumerState<TaskInput> {
             height: 5,
           ),
 
-          TextField(
-            controller: _datacontroller,
-            showCursor: false,
-            onTap: () {
-              getDateFormate(context);
-            },
-            onChanged: (value) {},
-            decoration: InputDecoration(
-                focusColor: Colors.grey.withOpacity(0.4),
-                hoverColor: Colors.grey.withOpacity(0.4),
-                fillColor: Colors.grey.withOpacity(0.4),
-                suffixIcon: const Icon(Icons.calendar_month),
-                contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10))),
-          ),
+          // TextField(
+          //   controller: _datacontroller,
+          //   showCursor: false,
+          //   onTap: () {
+          //     getDateFormate(context);
+          //   },
+          //   onChanged: (value) {},
+          //   decoration: InputDecoration(
+          //       focusColor: Colors.grey.withOpacity(0.4),
+          //       hoverColor: Colors.grey.withOpacity(0.4),
+          //       fillColor: Colors.grey.withOpacity(0.4),
+          //       suffixIcon: const Icon(Icons.calendar_month),
+          //       contentPadding:
+          //           const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          //       border: OutlineInputBorder(
+          //           borderRadius: BorderRadius.circular(10))),
+          // ),
           //data
           //date
+          ButtonTheme(
+            minWidth: 10.0,
+            child: OutlinedButton(
+              style: ButtonStyle(
+                elevation: MaterialStateProperty.all(10.0),
+                backgroundColor: MaterialStateProperty.all(Colors.pink),
+                padding: MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.only(
+                    top: 20.0, bottom: 20.0,
+                    left: 40.0, right: 40.0),
+                ),
+                side: MaterialStateProperty.all(const BorderSide(width: 1.0, color: Colors.white)),
+                splashFactory: NoSplash.splashFactory,
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0),
+                ),
+                ),
+              ),
+              onPressed: () => showDialog(
+                CupertinoTheme(
+                  data: const CupertinoThemeData(
+                      textTheme: CupertinoTextThemeData(
+                          dateTimePickerTextStyle: TextStyle(
+                            color: Colors.white,
+                          )
+                      )
+                  ),
+                  child: CupertinoDatePicker(
+                    initialDateTime: DateTime.now(),
+                    mode: CupertinoDatePickerMode.dateAndTime,
+                    use24hFormat: true,
+                    onDateTimeChanged: (DateTime newDateTime){
+                      setState(() {
+                        dateTime = dateTimeChecker(newDateTime);
+                      });
+                    },
+                  ),
+                ),
+              ),
+              child: Text('${dateTime.day} '
+                  '${format.format(dateTime)} '
+                  '${dateTime.year} '
+                  '${pad(dateTime.hour)}:${pad(dateTime.minute)}',
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16),
+              ),
+            ),
+          ),
           const SizedBox(
             height: 10,
           ),
