@@ -17,7 +17,7 @@ class TaskInput extends ConsumerStatefulWidget {
 }
 
 class _TaskInputState extends ConsumerState<TaskInput> {
-  DateTime dateTime = DateTime.now();
+  DateTime dateTime = DateTime.now(); //TODO pass this value to your provider to save the datetime
   final DateFormat format = DateFormat('MMMM');
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
