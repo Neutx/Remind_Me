@@ -16,6 +16,8 @@ import '../../util/widgets/button.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
+
+
   @override
   Widget build(BuildContext context) {
     NotificationClass().initiallizationPlatform(context);
@@ -76,6 +78,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
           MyButton(label: "+ Add Task", onTap: () =>Get.to(() => AddTask()), ),
+
         ],),
     );
   }

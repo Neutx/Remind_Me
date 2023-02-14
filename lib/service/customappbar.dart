@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
+
+import '../view/homepage/home_page.dart';
 
 // ignore: must_be_immutable
 class MyAppBar extends StatelessWidget {
@@ -18,15 +21,23 @@ class MyAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(25.0),
+      padding: const EdgeInsets.only(top: 24.0,bottom: 8.0, right: 8),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          IconButton(
+            icon: const Icon(CupertinoIcons.arrow_left,color:Colors.white ,),
+            onPressed: () => Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => const HomePage()),
+                  (route) => false,
+            ),
+          ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 8.0),
               child: Text(
                 title,
+                textAlign: TextAlign.center,
                 style: GoogleFonts.bebasNeue(
                   fontSize: 42,
                   color: Theme.of(context).colorScheme.onBackground,

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:work_manager/view/homepage/home_page.dart';
 import '../../database/notes_database.dart';
 import '../../model/note.dart';
 import '../../service/customappbar.dart';
 import '../../util/note_card_widget.dart';
+import '../addtask/add_task.dart';
 import 'components/edit_note_page.dart';
 import 'components/note_detail_page.dart';
 
@@ -129,11 +133,14 @@ class _NotesPageState extends State<NotesPage> {
             ),
             SafeArea(
               child: MyAppBar(
+
                 title: 'Notes',
                 onIconTap: _add,
                 iconName: Iconsax.add,
               ),
             ),
+            SizedBox( height:20),
+
           ],
         ),
       );

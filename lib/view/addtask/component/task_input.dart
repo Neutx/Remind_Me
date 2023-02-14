@@ -210,9 +210,9 @@ class _TaskInputState extends ConsumerState<TaskInput> {
                             child: addTask.colorindex == index
                                 ? const Center(
                                     child: Icon(
-                                    Icons.check,
+                                    Icons.done,
                                     color: Colors.black,
-                                    size: 20,
+                                    size: 16,
                                   ))
                                 : const Text(""),
                           ),

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:isolate';
 import 'package:isar/isar.dart';
-
 import 'package:work_manager/model/task_model.dart';
 
 class IsarService {

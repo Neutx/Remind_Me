@@ -21,7 +21,7 @@ class ReminderTask extends StatelessWidget {
           onTap: () {
             Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) => const HomePage()),
+                MaterialPageRoute(builder: (context) =>  HomePage()),
                 (route) => false);
           },
           child: const Icon(
