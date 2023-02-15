@@ -47,7 +47,7 @@ class CustomAppBar extends StatelessWidget {
         GestureDetector(
           onTap: () { Get.to (() => SettingsScreen()); },
           child: CircleAvatar(
-            backgroundImage: AssetImage("assets/images/SplashScreen.jpg"),
+            backgroundImage: AssetImage("assets/images/profil.png"),
           ),
         ),
         SizedBox(
