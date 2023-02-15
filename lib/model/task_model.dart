@@ -24,6 +24,8 @@ class TaskModel {
 
   @override
   String toString() {
-    return 'TaskModel(id: $id, title: $title, description: $description, startTime: $startTime, endTime: $endTime,date: $date,colors: $colors)';
+    return 'TaskModel(id: $id, title: $title, '
+        'description: $description, startTime: $startTime, '
+        'endTime: $endTime,date: $date,colors: $colors)';
   }
 }
