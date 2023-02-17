@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:work_manager/controller/add_task_provider.dart';
 import 'package:work_manager/util/colors_list.dart';
 import 'package:work_manager/util/widgets/textStyle.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:work_manager/view/addtask/component/custom_date_picker.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:intl/intl.dart';
-import 'package:work_manager/util/widgets/extra_functions.dart';
 
 class TaskInput extends ConsumerStatefulWidget {
   const TaskInput({super.key});
@@ -17,8 +15,10 @@ class TaskInput extends ConsumerStatefulWidget {
 }
 
 class _TaskInputState extends ConsumerState<TaskInput> {
+
   DateTime dateTime = DateTime.now(); //TODO pass this value to your provider to save the datetime
   final DateFormat format = DateFormat('MMMM');
+
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
   final TextEditingController _datacontroller = TextEditingController();
@@ -44,23 +44,6 @@ class _TaskInputState extends ConsumerState<TaskInput> {
   @override
   Widget build(BuildContext context) {
     final addTask = ref.watch(createTaskProvider);
-    void showDialog(Widget child){
-      showCupertinoModalPopup<void>(context: context,
-        builder: (BuildContext context) => Container(
-          height: 216,
-          padding: const EdgeInsets.only(
-              top: 6.0),
-          margin: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-          ),
-          color: Colors.pink,
-          child: SafeArea(
-            top: false,
-            child: child,
-          ),
-        ),
-      );
-    }
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
