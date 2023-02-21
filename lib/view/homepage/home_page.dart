@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,45 +19,23 @@ import '../../util/widgets/button.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
-  late int _selectedIndex;
-
-
 
 
   @override
-
-
-  }
   Widget build(BuildContext context) {
     NotificationClass().initiallizationPlatform(context);
     return Scaffold(
       bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-          color: Colors.transparent,
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 20,
-              color: Colors.black.withOpacity(.1),
-            )
-          ],
-        ),
-        child: SafeArea(
-          child: Padding(
-            padding:
-            const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
-            child: GNav(
-              rippleColor: Colors.grey[700]!,
-              hoverColor: Colors.grey[100]!,
-              gap: 8,
-              activeColor:  Color(0xFFF7F7F7).withOpacity(0.5),
-              iconSize: 24,
-              padding:
-              const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-              duration: const Duration(milliseconds: 400),
-              tabBackgroundColor: Colors.transparent,
-              color:const Color(0xFFF7F7F7),
+        color: Colors.black,
+        child: Padding(padding: EdgeInsets.symmetric(horizontal: 10,vertical: 20),
+          child: GNav(
+              backgroundColor: Colors.black,
+              color: Colors.white,
+              activeColor: Colors.white,
+              tabBackgroundColor: primaryClr,
+              padding: EdgeInsets.all(14),
+              duration: Duration(milliseconds: 800),
+              tabBorderRadius: 10,
               tabs: const [
                 GButton(
                   icon: Icons.home,
@@ -72,51 +50,22 @@ class HomePage extends StatelessWidget {
                   text: 'Notes',
                 ),
               ],
-              selectedIndex: _selectedIndex,
+              selectedIndex: 0,
               onTabChange: (index) {
-                setState(() {
-                  _selectedIndex = index;
-                });
+                if(index==1){
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => const AddTask()));
+                }
+                if(index==2){
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => const NotesPage()));
+                }
               },
-            ),
+              gap: 8,
           ),
         ),
       ),
 
-
-
-
-      // bottomNavigationBar: Container(
-      //   color: Colors.black,
-      //   child: Padding(padding: EdgeInsets.symmetric(horizontal: 10,vertical: 20),
-      //     child: GNav(
-      //       backgroundColor: Colors.black,
-      //       color: Colors.white,
-      //       activeColor: Colors.white,
-      //       tabBackgroundColor: primaryClr,
-      //       padding: EdgeInsets.all(14),
-      //       onTabChange: (index) {
-      //         if(index==1){
-      //           Navigator.pushReplacement(context,
-      //               MaterialPageRoute(builder: (context) => const AddTask()));
-      //         }
-      //         else if (index==2 ) { Navigator.pushReplacement(context,
-      //             MaterialPageRoute(builder: (context) => const NotesPage()));
-      //
-      //         }
-      //         else if (index==0 ) { Navigator.pushReplacement(context,
-      //             MaterialPageRoute(builder: (context) => const HomePage()));
-      //
-      //         }
-      //       },
-      //       gap: 8, tabs:const[
-      //       GButton(icon: Icons.home, text: "Home",),
-      //       GButton(icon: Icons.add, text: "Add Task"),
-      //       GButton(icon: Icons.notes, text: "Notes"),
-      //
-      //         ]),
-      //   ),
-      // ),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(0),
         child: CustomAppBar()),
